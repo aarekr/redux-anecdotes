@@ -22,20 +22,33 @@ const initialState = anecdotesAtStart.map(asObject)
 const reducer = (state = initialState, action) => {
     console.log('state now: ', state)
     console.log('action', action)
+    console.log('action.type', action.type)
 
-    const anecdoteToChange = state.find(n => Number(n.id) === Number(action.id))
-    console.log('muutettava anecdote:', anecdoteToChange)
-    
-    const changedAnecdote = { 
-        content: action.content,
-        id: action.id,
-        votes: action.votes + 1
+    switch(action.type){
+        case 'new_anecdote':
+            const newAnecdote = {
+                content: action.data.content,
+                id: action.data.id,
+                votes: action.data.votes
+            }
+            console.log('valmis uusi anecdote:', newAnecdote)
+            state = state.concat(newAnecdote)
+            return state
+        case 'add_vote':
+            const anecdoteToChange = state.find(n => Number(n.id) === Number(action.id))
+            console.log('muutettava anecdote:', anecdoteToChange)
+            
+            const changedAnecdote = { 
+                content: action.content,
+                id: action.id,
+                votes: action.votes + 1
+            }
+
+            console.log('changedAnecdote:', changedAnecdote)
+            state = state.map(n => Number(n.id) === Number(action.id) ? changedAnecdote : n)
+            return state
+        default: return state
     }
-
-    console.log('changedAnecdote:', changedAnecdote)
-    state = state.map(n => Number(n.id) === Number(action.id) ? changedAnecdote : n)
-  
-    return state
 }
 
 export default reducer
