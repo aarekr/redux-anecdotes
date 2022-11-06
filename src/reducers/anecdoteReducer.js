@@ -46,6 +46,7 @@ const reducer = (state = initialState, action) => {
 
             console.log('changedAnecdote:', changedAnecdote)
             state = state.map(n => Number(n.id) === Number(action.id) ? changedAnecdote : n)
+            state = state.sort((a,b) => Number(b.votes) - Number(a.votes))
             return state
         default: return state
     }
