@@ -32,14 +32,14 @@ export const createAnecdote = (content) => {
     }
 }
 
-export const voteOf = (id, content, votes) => {
+export const voteAnecdote = (id, content, votes) => {
     return{
       type: 'add_vote',
       id: id,
       content: content,
       votes: votes
     }
-  }
+}
 
 const reducer = (state = initialState, action) => {
     console.log('state now: ', state)
