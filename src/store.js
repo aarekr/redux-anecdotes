@@ -1,12 +1,20 @@
-import { configureStore } from '@reduxjs/toolkit'
-import anecdoteReducer from './reducers/anecdoteReducer'
+import { createStore, combineReducers } from '@reduxjs/toolkit'
+import anecdoteService from './services/anecdotes'
+import anecdoteReducer, { setAnecdotes } from './reducers/anecdoteReducer'
+import filterReducer from './reducers/filterReducer'
+import hakusanaReducer from './reducers/hakusanaReducer'
 
-const store = configureStore({
-    reducer: {
-      anecdotes: anecdoteReducer
-    }
+const reducer = combineReducers({
+  anecdotes: anecdoteReducer,
+  filter: filterReducer,
+  hakusana: hakusanaReducer
 })
 
-console.log('index:', store.getState())
+const store = createStore(reducer)
+
+console.log('store:', store.getState())
+
+anecdoteService.getAll().then(anecdotes => 
+  store.dispatch(setAnecdotes(anecdotes)))
 
 export default store
