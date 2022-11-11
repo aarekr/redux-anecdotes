@@ -3,12 +3,14 @@ import anecdoteService from './services/anecdotes'
 import anecdoteReducer, { setAnecdotes } from './reducers/anecdoteReducer'
 import filterReducer from './reducers/filterReducer'
 import notificationReducer from './reducers/notificationReducer'
+import hakusanaReducer from './reducers/hakusanaReducer'
 
 const store = configureStore({
   reducer: {
     anecdotes: anecdoteReducer,
-    filter: filterReducer,
-    ilmoitus: notificationReducer
+    filter: filterReducer,     // VisibilityFilter.js, tämä on oma ylimääräinen kokeiluni
+    ilmoitus: notificationReducer,
+    hakusana: hakusanaReducer  // Filter.js, tehtävä 6.12*
   }
 })
 
