@@ -37,7 +37,6 @@ const VisibilityFilter = (props) => {
           </div>
         )}
       </div>
-      
     </div>
   )
 }
