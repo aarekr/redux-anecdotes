@@ -1,5 +1,4 @@
 const filterReducer = (state = 'ALL', action) => {
-    console.log('filterReducerin action.type:', action.type)
     switch(action.type) {
         case 'SET_FILTER':
             return action.filter
